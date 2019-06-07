@@ -3,7 +3,7 @@
 #include <time.h>
 
 
-#define L 3
+#define L 250
 #define rate 10
 
 void print_matrix2D(int matrix[][L],int sizeX,int sizeY);//A function to print one MATRIX 2D
@@ -14,6 +14,9 @@ void convert_matrix2D(int **matrix,int matrixA[][L]);//converter a pointer matri
 void return_primary(int matrix[][L],int size);
 
 int main(){
+    clock_t Ticks[2];
+    double Tempo;
+    Ticks[0]= clock();
     srand(time(NULL));
     int A[L][L], B[L][L], C[L][L], matrixresult[L][L];
     
@@ -33,14 +36,22 @@ int main(){
     mult_matrix2D(A,C,matrixresult,L);
     //print_matrix2D(matrixresult,L,L);
     sum_matrix2D(matrixresult,B,matrixresult,L);
-
+    
+    Ticks[1]= clock();
     printf("(A X C + B) = \n");
 
     print_matrix2D(matrixresult,L,L);
     printf("primary diagonal\n");
     return_primary(matrixresult,L);
+    
+    
+    //TIME
+    Tempo = ((((Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC)/1.964158)/10);
+    printf("\n\nEXECUTION - %.10g seg",Tempo);
 
      printf("\n");
+
+     
 
     
     
