@@ -3,7 +3,7 @@
 #include <time.h>
 
 
-#define L 250
+#define L 3
 #define rate 10
 
 void print_matrix2D(int matrix[][L],int sizeX,int sizeY);//A function to print one MATRIX 2D
@@ -21,20 +21,20 @@ int main(){
     int A[L][L], B[L][L], C[L][L], matrixresult[L][L];
     
     //randomize matrix
-    //printf("Matrix A\n");
+    printf("Matrix A\n");
     random_squadmatrix(A,L,L);
-    //print_matrix2D(A,L,L);
+    print_matrix2D(A,L,L);
 
-    //printf("Matrix B\n");
+    printf("Matrix B\n");
     random_squadmatrix(B,L,L);
-    //print_matrix2D(B,L,L);
+    print_matrix2D(B,L,L);
 
-    //printf("Matrix C\n");
+    printf("Matrix C\n");
     random_squadmatrix(C,L,L);
-    //print_matrix2D(C,L,L);
+    print_matrix2D(C,L,L);
 
     mult_matrix2D(A,C,matrixresult,L);
-    //print_matrix2D(matrixresult,L,L);
+    print_matrix2D(matrixresult,L,L);
     sum_matrix2D(matrixresult,B,matrixresult,L);
     
     Ticks[1]= clock();
