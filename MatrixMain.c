@@ -68,9 +68,7 @@ int main(void){
     mul(matA,matC,matB);
     
 
-    Tempo = ((Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC);
-    //counting the time
-    printf("\n\nEXECUTION - %.10g seg \n",Tempo);
+   
 
 
 }
