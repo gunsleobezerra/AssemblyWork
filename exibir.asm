@@ -111,6 +111,8 @@ exibir:
 	sum:
 
 	
+
+	
 	jmp end
 	
 
@@ -134,8 +136,23 @@ end:
 	;setmat esi,0,0,[soma]
 	;setmat esi,0,1,[j]
 	;setmat esi,1,0,[k]
+	;Diagonal
+	xor ebx,ebx
+	xor edx,edx
 	
-	
+	diagonal:
+	cmp ebx,[ebp+24]
+	jl diagonalsum         ;Soma diagonal principal
+	mov eax,edx
+
 	pop ebx
 	leave
 	ret 
+
+diagonalsum:
+	
+	getmat esi,ebx,ebx
+	add edx,eax
+	inc ebx
+	jmp diagonal
+
