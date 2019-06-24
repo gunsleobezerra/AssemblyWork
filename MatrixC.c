@@ -18,8 +18,7 @@ int main(){
     Ticks[0]= clock();
     //srand(time(NULL));
     int A[L][L], B[L][L], C[L][L], matrixresult[L][L];
-    int result;
-
+    
     //randomize matrix
     printf("Matrix A\n");
     random_squadmatrix(A,L,L);
@@ -33,27 +32,23 @@ int main(){
     random_squadmatrix(C,L,L);
     print_matrix2D(C,L,L);
 
-   //asm
-
-    extern int exibir(int A[][L],int B[][L],int C[][L],int res[][L],int sizes);
-    result = exibir(A,B,C,matrixresult,L);
-
-   //end asm
+    mult_matrix2D(A,C,matrixresult,L);
+    print_matrix2D(matrixresult,L,L);
+    //sum_matrix2D(matrixresult,B,matrixresult,L);
+    
    
-    
-    
     printf("(A X C + B) = \n");
 
     print_matrix2D(matrixresult,L,L);
-    printf("primary diagonal : %d \n",result);
-    
+    printf("primary diagonal\n");
+    return_primary(matrixresult,L);
     Ticks[1]= clock();
+    
     //TIME
     Tempo = ((((Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC)/1.964158)/10)*1000;
     printf("\n\nEXECUTION - %.10g ms",Tempo);
 
-    printf("\n");
-   
+     printf("\n");
 
      
 
@@ -103,3 +98,56 @@ void random_squadmatrix(int matrix[][L],int sizeX,int sizeY){
 
 }
 
+void sum_matrix2D(int matrixA[][L],int matrixB[][L],int matrixresult[][L],int size){
+
+     int i=0,j=0;
+
+    
+
+    for(i=0;i<size;i++){
+
+        for(j=0;j<size;j++){
+
+
+            matrixresult[i][j] = matrixA[i][j] + matrixB[i][j];
+            
+           
+        }
+    }
+}
+
+void mult_matrix2D(int matrixA[][L],int matrixB[][L],int matrixresult[][L],int size){
+    int i=0,j=0,k=0,sum=0;
+
+     for(i=0;i<size;i++){         
+        for (;k<size;k++){
+                  
+            for(j=0;j<size;j++){
+
+
+                sum += matrixA[i][j] * matrixB[j][k];
+                
+            
+            }
+            matrixresult[i][k] =sum;
+            sum=0; 
+        }
+        k=0;
+    }
+
+}
+
+
+
+void return_primary(int matrix[][L],int size){
+
+    int i=0,sum=0;
+
+    for(;i<size;i++){
+
+        sum+= matrix[i][i];
+
+    }
+
+    printf("%d",sum);
+}
