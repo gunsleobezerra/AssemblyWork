@@ -56,9 +56,11 @@ exibirgas:
     movl 8(%ebp),%edi  
     movl 20(%ebp),%esi 
     movl 16(%ebp),%ecx 
-        pushl %ebx
-        #mult A x C
+    pushl %ebx
 
+   
+        #mult A x C
+      
         forI: 
         movl 24(%ebp),%edx
         cmpl %edx,i
@@ -70,7 +72,7 @@ exibirgas:
                 xorl %ebx,%ebx
                 cmpl %edx,j
                 jnl addI
-
+                
 
 
                         forK: 
@@ -79,13 +81,13 @@ exibirgas:
                         jnl  attres
 
                         pushl %edx
-                        getmat edi,$i,$k
+                        getmat edi,i,k
                         movl %eax,%edx
-                        getmat ecx,$k,$j
+                        getmat ecx,k,j
                         mulb %dl
                         addl %eax,%ebx
                         popl %edx
-
+                        
 
 
 
@@ -106,14 +108,15 @@ exibirgas:
         ###
 
         attres: 
-        setmat esi,$i,$j,%ebx
-
+        
+        setmat esi,i,j,%ebx
+        
         jmp addJ
 
-
+       
 
         sum: 
-
+       
         xorl %ebx,%ebx
         xorl %ecx,%ecx
         movl 12(%ebp),%ecx 
