@@ -3,7 +3,7 @@
 #include <time.h>
 
 
-#define L 100
+#define L 15
 #define rate 10
 
 void print_matrix2D(int matrix[][L],int sizeX,int sizeY);//A function to print one MATRIX 2D
