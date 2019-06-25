@@ -3,6 +3,7 @@
     i: .byte 0
     j: .byte 0
     k: .byte 0
+    
 
 
 
@@ -12,16 +13,16 @@
 
                 pushl %edx
                 #push i and j 
-                movl $\b, %eax
+                movl \b, %eax
                 pushl %eax
-                movl $\c, %eax
+                movl \c, %eax
                 pushl %eax
                 #
                 movl 24(%ebp),%eax # L size
                 call index
                 popl %edx
-
-                movl \a(%eax),%eax #acesses position
+               
+                movl (%\a,%eax),%eax #acesses position
 
                 #retorna o valor da posição em eax    
      .endm
@@ -29,31 +30,32 @@
      .macro setmat a,b,c,d
 
                 pushl %edx
-                #push i and j 
-                movl $\b, %eax
+              
+                movl \b, %eax
                 pushl %eax
-                movl $\c, %eax
+                movl \c, %eax
                 pushl %eax
-                #
-                movl 24(%ebp),%eax # L size
+                
+                movl 24(%ebp),%eax 
                 call index
 
-                movl $\d, %edx
-                movl %edx,\a(%eax) #acesses position
+                movl \d, %edx
+                
+                movl %edx,(%\a,%eax) 
                 popl %edx
 
      .endm
 
-        .global exibir
+        .global exibirgas
 
-exibir: 
+exibirgas: 
 
         enter $0,$0
 
 
-    movl 8(%ebp),%edi #matA 
-    movl 20(%ebp),%esi #mat res
-    movl 16(%ebp),%ecx #matC
+    movl 8(%ebp),%edi  
+    movl 20(%ebp),%esi 
+    movl 16(%ebp),%ecx 
         pushl %ebx
         #mult A x C
 
@@ -77,9 +79,9 @@ exibir:
                         jnl  attres
 
                         pushl %edx
-                        getmat edi,i,k
+                        getmat edi,$i,$k
                         movl %eax,%edx
-                        getmat ecx,k,j
+                        getmat ecx,$k,$j
                         mulb %dl
                         addl %eax,%ebx
                         popl %edx
@@ -104,7 +106,7 @@ exibir:
         ###
 
         attres: 
-        setmat esi,i,j,ebx"
+        setmat esi,$i,$j,%ebx
 
         jmp addJ
 
@@ -114,32 +116,32 @@ exibir:
 
         xorl %ebx,%ebx
         xorl %ecx,%ecx
-        movl 12(%ebp),%ecx # Mat B [0][0]
-        movl 24(%ebp),%edx # Size
+        movl 12(%ebp),%ecx 
+        movl 24(%ebp),%edx 
         movl %edx,%eax
-        mulb %dl         # Size ^ 2 Numero de elementos
+        mulb %dl        
         movl $4,%edx
-        mulb %dl         # NM * 4 = Numero de bytes
+        mulb %dl         
         xorl %edx,%edx
 
         sumloop: 
         cmpl %eax,%ebx
         jnl end
-        movl (%ecx,%ebx),%edx # Mat B [i][j]
-        addl %edx,(%esi,%ebx) # Mat res [i][j] +  mat B [i][j]
-        addl $4,%ebx # size of int
+        movl (%ecx,%ebx),%edx 
+        addl %edx,(%esi,%ebx) 
+        addl $4,%ebx 
         jmp sumloop
 
 
-######################################################calcula indice da matriz
+
 index: 
-        #eax tamanho máximo da matriz
+        
         enter $0,$8
         xorl %edx,%edx
 
         movl 12(%ebp),%edx
         mulb %dl
-        addl 8(%ebp),%eax #(i*l + j)*4
+        addl 8(%ebp),%eax 
         movb $4,%dl
         mulb %dl
 
@@ -166,7 +168,9 @@ end:
 
 diagonalsum: 
 
-        getmat %esi,%ebx,%ebx
+        getmat esi,%ebx,%ebx
         addl %eax,%edx
         incl %ebx
         jmp diagonal
+
+        
