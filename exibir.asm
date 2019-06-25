@@ -3,7 +3,7 @@
     i: DB 0
     j: DB 0
     k: DB 0 
-   
+	
 
  
     SECTION .text
@@ -23,7 +23,7 @@
 		
 		mov eax,[%1+eax];acesses position
 
-
+		;retorna o valor da posição em eax	
 	%endmacro
 
 	%macro setmat 4
@@ -117,17 +117,17 @@ exibir:
 	mov ecx,[ebp+12] ; Mat B [0][0]
 	mov edx,[ebp+24] ; Size
 	mov eax,edx
-	mul dl
+	mul dl           ; Size ^ 2 Numero de elementos
 	mov edx,4
-	mul dl           ; Size * 4 = Numero de bytes
+	mul dl           ; NM * 4 = Numero de bytes
 	xor edx,edx
 
 	sumloop:
 	cmp ebx,eax
-	jnle end
-	mov edx,[ecx+ebx]
-	add [esi+ebx],edx
-	add ebx , 4
+	jnl end
+	mov edx,[ecx+ebx] ; Mat B [i][j]
+	add [esi+ebx],edx ; Mat res [i][j] +  mat B [i][j]
+	add ebx , 4 ; size of int
 	jmp sumloop
 
 

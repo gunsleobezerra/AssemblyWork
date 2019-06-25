@@ -3,7 +3,7 @@
 #include <time.h>
 
 
-#define L 2
+#define L 15
 #define rate 10
 
 void print_matrix2D(int matrix[][L],int sizeX,int sizeY);//A function to print one MATRIX 2D
@@ -15,7 +15,7 @@ void return_primary(int matrix[][L],int size);
 int main(){
     clock_t Ticks[2];
     double Tempo;
-    Ticks[0]= clock();
+    
     //srand(time(NULL));
     int A[L][L], B[L][L], C[L][L], matrixresult[L][L];
     int result;
@@ -32,7 +32,7 @@ int main(){
     printf("Matrix C\n");
     random_squadmatrix(C,L,L);
     print_matrix2D(C,L,L);
-
+    Ticks[0]= clock();
    //asm
 
     extern int exibir(int A[][L],int B[][L],int C[][L],int res[][L],int sizes);
@@ -76,7 +76,6 @@ void print_matrix2D(int matrix[][L],int sizeX,int sizeY){
     }
     printf("\n");
 }
-
 
 void random_squadmatrix(int matrix[][L],int sizeX,int sizeY){
 
