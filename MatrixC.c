@@ -3,7 +3,7 @@
 #include <time.h>
 
 
-#define L 15
+#define L 100
 #define rate 10
 
 void print_matrix2D(int matrix[][L],int sizeX,int sizeY);//A function to print one MATRIX 2D
@@ -46,7 +46,7 @@ int main(){
     Ticks[1]= clock();
     
     //TIME
-    Tempo = ((((Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC)/1.964158)/10)*1000;
+    Tempo = ((((Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC)/1.964158)/10);
     printf("\n\nEXECUTION - %.10g ms",Tempo);
 
      printf("\n");
