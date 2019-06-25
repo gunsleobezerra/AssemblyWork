@@ -3,7 +3,7 @@
 #include <time.h>
 
 
-#define L 10
+#define L 2
 #define rate 10
 
 void print_matrix2D(int matrix[][L],int sizeX,int sizeY);//A function to print one MATRIX 2D
@@ -34,7 +34,7 @@ int main(){
 
     mult_matrix2D(A,C,matrixresult,L);
     print_matrix2D(matrixresult,L,L);
-    //sum_matrix2D(matrixresult,B,matrixresult,L);
+    sum_matrix2D(matrixresult,B,matrixresult,L);
     
    
     printf("(A X C + B) = \n");

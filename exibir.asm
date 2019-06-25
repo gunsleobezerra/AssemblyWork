@@ -108,13 +108,28 @@ exibir:
 	
 	jmp addJ
 
+	
+	
 	sum:
+	
+	xor ebx,ebx
+	xor ecx,ecx
+	mov ecx,[ebp+12] ; Mat B [0][0]
+	mov edx,[ebp+24] ; Size
+	mov eax,edx
+	mul dl
+	mov edx,4
+	mul dl           ; Size * 4 = Numero de bytes
+	xor edx,edx
 
-	
+	sumloop:
+	cmp ebx,eax
+	jnle end
+	mov edx,[ecx+ebx]
+	add [esi+ebx],edx
+	add ebx , 4
+	jmp sumloop
 
-	
-	jmp end
-	
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;calcula indice da matriz
 index:
